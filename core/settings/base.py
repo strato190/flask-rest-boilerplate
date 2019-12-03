@@ -2,7 +2,7 @@ import os
 
 from flask_env import MetaFlaskEnv
 
-project_name = "gotham"
+project_name = "flask_rest_boilerplate"
 
 
 class Config(metaclass=MetaFlaskEnv):
@@ -19,5 +19,5 @@ class Config(metaclass=MetaFlaskEnv):
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    LOGGER_NAME = "%s_log" % project_name
-    LOG_FILENAME = "/var/tmp/app.%s.log" % project_name
+    LOGGER_NAME = '%s_log' % project_name
+    LOG_FILENAME = '/var/tmp/app.%s.log' % project_name

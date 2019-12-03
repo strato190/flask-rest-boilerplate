@@ -5,47 +5,50 @@ info:
   version: 1.0.0
   description: Boilerplate for Flask REST APIs
   contact:
-      name: Team Guardians
-      email: team-guardians@antetechnologies.com
+      name: Amil Osmanli 
+      email: osmanli.ao@gmail.com
 
 servers:
-  - url: https://flask-rest-boilerplate.staging.ante.tools/api
-    description: Staging server
-  - url: https://flask-rest-boilerplate.production.ante.tools/api
-    description: Production server
   - url: http://127.0.0.1:5000/api
     description: Development server
 
-
 paths:
-  /hello:
+  /greetings:
     get:
       tags:
-        - hello
-      summary: Returns Hello world
-      description: Sample enpoint that returns Hello World message
+        - Greetings
+      summary: Returns greeting
+      description: Sample enpoint that returns greeting message
       parameters:
-        - $ref: '#/components/parameters/nameParam'
+        - $ref: '#/components/parameters/NameParam'
       responses:
-        200:
-         description: OK
-         content:
-           application/json:
-             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/HelloWorldMessage'
+        '200':
+          $ref: '#/components/responses/Greeting'
+        default:
+          description: |
+            error occurred - see status code and problem object for more information
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'https://zalando.github.io/problem/schema.yaml#/Problem'
 components:
   parameters:
-    nameParam:
+    NameParam:
       name: name
       in: query
       required: false
       description: Optional parameter to make enpoint to say your name
       schema:
         type: string
+  responses:
+    Greeting:
+      description: a greeting
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Greeting'
   schemas:
-    HelloWorldMessage:
+    Greeting:
       type: object
       required:
         - message

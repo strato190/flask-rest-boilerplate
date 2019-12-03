@@ -6,4 +6,4 @@ class DevelopmentConfig(Config):
 
     DEBUG = True
     DEVELOPMENT = True
-    SQLALCHEMY_DATABASE_URI = "postgres:///gotham"
+    SQLALCHEMY_DATABASE_URI = '' 

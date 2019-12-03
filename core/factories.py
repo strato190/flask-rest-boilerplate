@@ -7,7 +7,7 @@ from connexion import FlaskApp
 from connexion.resolver import RestyResolver
 from flask.logging import default_handler
 
-from core.extensions import db, ma, migrator
+from core.extensions import db, ma, migrator, cors
 
 
 settings = {
@@ -22,10 +22,6 @@ class SettingsError(Exception):
     pass
 
 
-class SwaggerError(Exception):
-    pass
-
-
 def get_config(setting_name):
     if settings.get(setting_name):
         return settings.get(setting_name)
@@ -37,6 +33,7 @@ def register_extensions(app):
     db.init_app(app)
     ma.init_app(app)
     migrator.init_app(app)
+    cors.init_app(app)
     return None
 
 
@@ -64,19 +61,6 @@ def register_logger(app):
     return None
 
 
-def register_error_handlers(app):
-    def create_error_handler(status_code, message):
-        def error_handler(error):
-            return jsonify(message=message), status_code
-
-        return error_handler
-
-    app.register_error_handlers(400, create_error_handler(400, "Bad request"))
-    app.register_error_handlers(401, create_error_handler(401, "Unathorized"))
-    app.register_error_handlers(403, create_error_handler(403, "Forbidden"))
-    app.register_error_handlers(404, create_error_handler(404, "Not found"))
-
-
 def create_app(config_name):
     config_obj = get_config(config_name)
 
@@ -91,7 +75,6 @@ def create_app(config_name):
 
     register_logger(flask_app)
     register_extensions(flask_app)
-    register_error_handlers(flask_app)
     register_api(cnnx_app)
 
     return flask_app

@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 flask = ">=1.0"
 flask-cors = ">=3.0"
-connexion = ">=2.2"
+connexion = {version = ">=2.2",extras = ["swagger-ui"]}
 "boto3" = ">=1.9"
 flask-env = ">=2.0"
 flask-sqlalchemy = ">=2.3"
@@ -16,12 +16,10 @@ flask-marshmallow = ">=0.9"
 sqlalchemy-utils = ">=0.33"
 marshmallow-sqlalchemy = ">=0.15"
 prometheus-client = ">=0.5"
-black = "*"
+sqlalchemy = "*"
 
 [dev-packages]
-black = ">=18"
 pylint = ">=2.2"
-connexion = {version = ">=2.2",extras = ["swagger-ui"]}
 pre-commit = ">=1.14"
 pytest-flask = ">=0.14"
 factory-boy = ">=2.11"

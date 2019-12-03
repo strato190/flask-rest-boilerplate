@@ -10,14 +10,6 @@ from app.data.models import SampleModel
 faker = FakerFactory.create()
 
 
-class StatusProvider(BaseProvider):
-    def status(self):
-        return random.choice(["active", "inactive"])
-
-
-faker.add_provider(StatusProvider)
-
-
 class SQLAlchemyModelFactory(factory.Factory):
     class Meta:
         abstract = True
@@ -39,3 +31,5 @@ class SampleFactory(SQLAlchemyModelFactory):
     id = factory.LazyAttribute(lambda x: faker.uuid4())
     foo = factory.LazyAttribute(lambda x: faker.name())
     bar = factory.LazyAttribute(lambda x: faker.pyint())
+    created = factory.LazyAttribute(lambda x: faker.datetime_iso8601())
+    updated = factory.LazyAttribute(lambda x: faker.datetime_iso8601())
