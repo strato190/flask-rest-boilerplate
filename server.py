@@ -1,6 +1,6 @@
 import os
 
-from werkzeug.wsgi import DispatcherMiddleware
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
 from prometheus_client import make_wsgi_app
 
@@ -11,7 +11,7 @@ if os.environ["APP_SETTINGS"]:
     settings_name = os.environ["APP_SETTINGS"]
 else:
     raise SettingsError("'APP_SETTINGS' environment " "variable is not defined")
-flask_app = create_app(__name__, settings_name)
+flask_app = create_app(settings_name)
 app = DispatcherMiddleware(flask_app, {"/metrics": make_wsgi_app()})
 
 

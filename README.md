@@ -42,7 +42,7 @@ To run project locally, assuming you have virtualenv and virtualenvwrapper
 ```bash
 mkvirtualenv gotham
 pip install -r requirements.txt
-python manage.py runserver
+APP_SETTINGS='development' python server.py
 ```
 
 Also, boilerplate includes all necessary Docker configuration to run it locally,
